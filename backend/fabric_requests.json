@@ -1,0 +1,139 @@
+{
+  "cases": [
+    {
+      "case_id": "CASE-TEST-001",
+      "evidence_hash": "hash-1763579362825",
+      "requester": "bank-user-001",
+      "created_at": "2025-11-19T19:09:22.858Z",
+      "status": "SUBMITTED",
+      "freeze_active": false,
+      "approvals": [],
+      "asset_refs": []
+    },
+    {
+      "case_id": "CASE-2025-001",
+      "evidence_hash": "hash-1763586458791",
+      "requester": "bank-user-001",
+      "created_at": "2025-11-19T21:07:38.804Z",
+      "status": "SUBMITTED",
+      "freeze_active": false,
+      "approvals": [],
+      "asset_refs": []
+    },
+    {
+      "case_id": "CASE-FREEZE-TEST-001",
+      "evidence_hash": "hash-1763588797213",
+      "requester": "bank-user-001",
+      "created_at": "2025-11-19T21:46:37.226Z",
+      "status": "FREEZE_ACTIVE",
+      "freeze_active": true,
+      "approvals": [
+        "lea-approver-001",
+        "LEA:IndiaCyber-1763592204577",
+        "LEA:IndiaCyber-1763592252659"
+      ],
+      "asset_refs": [
+        "bank:victim_hash_001_abc123def456",
+        "exchange:P2P-FREEZE-001",
+        "chain:0x742d35Cc6634C0532925a3b844Bc9e7595f0bEb"
+      ]
+    },
+    {
+      "case_id": "CASE-FREEZE-TEST-002",
+      "evidence_hash": "sha256:test-CASE-FREEZE-TEST-002",
+      "requester": "bank:HDFC",
+      "requestedBy": "bank:HDFC",
+      "created_at": "2025-11-19T22:10:57.815Z",
+      "status": "FREEZE_ACTIVE",
+      "freeze_active": true,
+      "approvals": [
+        "lea-approver-001",
+        "LEA:IndiaCyber-1763590398887",
+        "LEA:IndiaCyber-1763590400085"
+      ],
+      "requiredApprovals": 3,
+      "asset_refs": [
+        "bank:victim_hash_002_def456ghi789",
+        "exchange:P2P-FREEZE-002",
+        "chain:0x742d35Cc6634C0532925a3b844Bc9e7595f0bEb"
+      ],
+      "severity": "medium"
+    },
+    {
+      "case_id": "CASE-DEMO-001",
+      "evidence_hash": "hash-1763601685824",
+      "requester": "bank-user-001",
+      "requestedBy": "bank-user-001",
+      "created_at": "2025-11-20T01:21:25.863Z",
+      "status": "FREEZE_ACTIVE",
+      "freeze_active": true,
+      "approvals": [
+        "LEA:IndiaCyber-1763601792958",
+        "LEA:IndiaCyber-1763601797322",
+        "LEA:IndiaCyber-1763601847755"
+      ],
+      "requiredApprovals": 3,
+      "asset_refs": [
+        "bank:victim_hash_001_abc123def456",
+        "exchange:P2P-FREEZE-001",
+        "chain:0x742d35Cc6634C0532925a3b844Bc9e7595f0bEb"
+      ],
+      "severity": "medium"
+    },
+    {
+      "case_id": "CASE-DEMO-002",
+      "evidence_hash": "hash-1763602711686",
+      "requester": "bank-user-001",
+      "requestedBy": "bank-user-001",
+      "created_at": "2025-11-20T01:38:31.699Z",
+      "status": "PENDING_APPROVAL",
+      "freeze_active": false,
+      "approvals": [
+        "lea-approver-001"
+      ],
+      "requiredApprovals": 3,
+      "asset_refs": [
+        "bank:victim_hash_002_def456ghi789",
+        "exchange:P2P-FREEZE-002",
+        "chain:0x742d35Cc6634C0532925a3b844Bc9e7595f0bEb"
+      ],
+      "severity": "medium"
+    },
+    {
+      "case_id": "CASE-1771569573367",
+      "evidence_hash": "d429282afe18715f6b2f530a4e9786b3a76a9e0c0cf1aa23a51ccbd4113a9925",
+      "requester": "demo-runner",
+      "requestedBy": "demo-runner",
+      "created_at": "2026-02-20T06:39:33.510Z",
+      "status": "FREEZE_REQUESTED",
+      "freeze_active": false,
+      "approvals": [
+        "lea-approver-001",
+        "lea-approver-002"
+      ],
+      "requiredApprovals": 3,
+      "asset_refs": [
+        "0x742d35Cc6634C0532925a3b844Bc9e7595f0bEb"
+      ],
+      "severity": "medium"
+    },
+    {
+      "case_id": "CASE-1775833763000",
+      "evidence_hash": "d1e9956658ae7b114b18eb8c160debbf150e58f2315024788fcc58badc690ff5",
+      "requester": "demo-runner",
+      "requestedBy": "demo-runner",
+      "created_at": "2026-04-10T15:09:23.121Z",
+      "status": "FREEZE_REQUESTED",
+      "freeze_active": false,
+      "approvals": [
+        "lea-approver-001",
+        "lea-approver-002"
+      ],
+      "requiredApprovals": 3,
+      "asset_refs": [
+        "0x742d35Cc6634C0532925a3b844Bc9e7595f0bEb"
+      ],
+      "severity": "medium"
+    }
+  ]
+}

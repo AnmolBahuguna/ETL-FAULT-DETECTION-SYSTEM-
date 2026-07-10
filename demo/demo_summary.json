@@ -1,0 +1,9 @@
+{
+  "case_id": "CASE-1775833763000",
+  "evidence_hash": "d1e9956658ae7b114b18eb8c160debbf150e58f2315024788fcc58badc690ff5",
+  "utr": "UTR-FREEZE-001",
+  "wallet_address": "0x742d35Cc6634C0532925a3b844Bc9e7595f0bEb",
+  "trace_paths": 1,
+  "exchange_endpoints": [],
+  "completed_at": "2026-04-10T15:09:25.143Z"
+}
