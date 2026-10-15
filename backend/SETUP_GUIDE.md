@@ -16,18 +16,19 @@ npm install
 
 This will install:
 - `express` - Web server
-- `ethers` - Blockchain interaction
 - `ws` - WebSocket server
 - `axios` - HTTP requests for webhooks
 - `cors` - Cross-origin support
 - `dotenv` - Environment variables
+
+> **Dependency note:** The monitoring service imports `ethers`, but `ethers` is not currently declared in `backend/package.json`. A clean `npm install` therefore does not install this required dependency; the service needs that manifest issue resolved before it can start from a clean checkout.
 
 ### 3. Create Environment File
 
 Create a file named `.env` in the `backend` directory:
 
 ```env
-PORT=5000
+PORT=5001
 ETHEREUM_RPC_URL=https://eth.llamarpc.com
 ETHEREUM_WS_URL=wss://eth.llamarpc.com
 CHAIN_NAME=ethereum
@@ -41,13 +42,15 @@ CHAIN_NAME=ethereum
 ### 4. Start the Server
 
 ```bash
-npm start
+node server.js
 ```
 
 For development with auto-reload:
 ```bash
-npm run dev
+npx nodemon server.js
 ```
+
+Run these commands from the `backend/` directory. The backend package's `npm start` command starts the separate Fraud Trail API in `src/index.js` on port `4000`; it does not start this monitoring service.
 
 You should see:
 ```
@@ -56,9 +59,9 @@ You should see:
 🔗 RPC URL: https://eth.llamarpc.com
 🔌 WebSocket: Enabled
 
-✅ Server running on port 5000
-📡 WebSocket server ready: ws://localhost:5000
-🌐 HTTP API: http://localhost:5000
+✅ Server running on port 5001
+📡 WebSocket server ready: ws://localhost:5001
+🌐 HTTP API: http://localhost:5001
 🔍 Blockchain monitoring active for ethereum
 ```
 
@@ -68,32 +71,32 @@ Open a new terminal and test:
 
 ```bash
 # Health check
-curl http://localhost:5000/health
+curl http://localhost:5001/health
 
 # Add an address to track
-curl -X POST http://localhost:5000/api/track/address \
+curl -X POST http://localhost:5001/api/track/address \
   -H "Content-Type: application/json" \
   -d '{"address": "0x742d35Cc6634C0532925a3b844Bc9e7595f0bEb"}'
 
 # Check tracked addresses
-curl http://localhost:5000/api/track/addresses
+curl http://localhost:5001/api/track/addresses
 
 # Get system status
-curl http://localhost:5000/api/blockchain/status
+curl http://localhost:5001/api/blockchain/status
 ```
 
 ## 🎯 Quick Test Example
 
 1. **Add a wallet to track:**
    ```bash
-   curl -X POST http://localhost:5000/api/track/address \
+   curl -X POST http://localhost:5001/api/track/address \
      -H "Content-Type: application/json" \
      -d '{"address": "0xd8dA6BF26964aF9D7eEd9e03E53415D37aA96045"}'
    ```
 
 2. **Configure a webhook (optional):**
    ```bash
-   curl -X POST http://localhost:5000/api/webhooks/config \
+   curl -X POST http://localhost:5001/api/webhooks/config \
      -H "Content-Type: application/json" \
      -d '{
        "address": "0xd8dA6BF26964aF9D7eEd9e03E53415D37aA96045",
@@ -103,15 +106,15 @@ curl http://localhost:5000/api/blockchain/status
 
 3. **Monitor transactions:**
    - Watch the server console for activity
-   - Check transactions: `curl http://localhost:5000/api/transactions`
-   - Connect WebSocket client to `ws://localhost:5000`
+   - Check transactions: `curl http://localhost:5001/api/transactions`
+   - Connect WebSocket client to `ws://localhost:5001`
 
 ## 🔧 Troubleshooting
 
 ### Port Already in Use
 ```bash
 # Change PORT in .env file
-PORT=5001
+PORT=5002
 ```
 
 ### RPC Connection Failed
@@ -139,4 +142,3 @@ PORT=5001
 ## 🎉 You're Ready!
 
 Your blockchain monitoring service is now running and ready to track wallet activity in real-time!
-

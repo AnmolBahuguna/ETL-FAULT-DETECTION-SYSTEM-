@@ -28,19 +28,23 @@ npm install
 ### 2. Configure Environment
 
 ```bash
-cp .env.example .env
+cp ../.env.example .env
 # Edit .env with your RPC endpoints
 ```
 
 ### 3. Start the Server
 
 ```bash
-npm start
+node server.js
 # or for development:
-npm run dev
+npx nodemon server.js
 ```
 
-The server will start on `http://localhost:5000`
+Run these commands from the `backend/` directory. This starts the separate blockchain monitoring service on `http://localhost:5001` by default.
+
+> **Dependency note:** The monitoring service imports `ethers`, but `ethers` is not currently declared in `backend/package.json`. A clean `npm install` therefore does not install this required dependency; the service needs that manifest issue resolved before it can start from a clean checkout.
+
+The backend package's `npm start` command starts the Fraud Trail API in `src/index.js` on port `4000`, not this monitoring service.
 
 ## 📡 API Endpoints
 
@@ -48,35 +52,35 @@ The server will start on `http://localhost:5000`
 
 ```bash
 # Add address to track
-curl -X POST http://localhost:5000/api/track/address \
+curl -X POST http://localhost:5001/api/track/address \
   -H "Content-Type: application/json" \
   -d '{"address": "0x742d35Cc6634C0532925a3b844Bc9e7595f0bEb"}'
 
 # List tracked addresses
-curl http://localhost:5000/api/track/addresses
+curl http://localhost:5001/api/track/addresses
 
 # Remove address
-curl -X DELETE http://localhost:5000/api/track/address/0x742d35Cc6634C0532925a3b844Bc9e7595f0bEb
+curl -X DELETE http://localhost:5001/api/track/address/0x742d35Cc6634C0532925a3b844Bc9e7595f0bEb
 ```
 
 ### Get Transactions
 
 ```bash
 # Get recent transactions
-curl http://localhost:5000/api/transactions?limit=50
+curl http://localhost:5001/api/transactions?limit=50
 
 # Get transactions for specific address
-curl http://localhost:5000/api/transactions/0x742d35Cc6634C0532925a3b844Bc9e7595f0bEb
+curl http://localhost:5001/api/transactions/0x742d35Cc6634C0532925a3b844Bc9e7595f0bEb
 
 # Get all activities (tokens, NFTs, etc.)
-curl http://localhost:5000/api/transactions/activities/all?limit=100
+curl http://localhost:5001/api/transactions/activities/all?limit=100
 ```
 
 ### Configure Webhooks
 
 ```bash
 # Configure webhook for an address
-curl -X POST http://localhost:5000/api/webhooks/config \
+curl -X POST http://localhost:5001/api/webhooks/config \
   -H "Content-Type: application/json" \
   -d '{
     "address": "0x742d35Cc6634C0532925a3b844Bc9e7595f0bEb",
@@ -85,7 +89,7 @@ curl -X POST http://localhost:5000/api/webhooks/config \
   }'
 
 # Test webhook
-curl -X POST http://localhost:5000/api/webhooks/test \
+curl -X POST http://localhost:5001/api/webhooks/test \
   -H "Content-Type: application/json" \
   -d '{
     "address": "0x742d35Cc6634C0532925a3b844Bc9e7595f0bEb",
@@ -97,18 +101,18 @@ curl -X POST http://localhost:5000/api/webhooks/test \
 
 ```bash
 # Get current block number
-curl http://localhost:5000/api/blockchain/block/current
+curl http://localhost:5001/api/blockchain/block/current
 
 # Get system status
-curl http://localhost:5000/api/blockchain/status
+curl http://localhost:5001/api/blockchain/status
 ```
 
 ## 🔌 WebSocket Connection
 
-Connect to `ws://localhost:5000` to receive real-time updates:
+Connect to `ws://localhost:5001` to receive real-time updates:
 
 ```javascript
-const ws = new WebSocket('ws://localhost:5000');
+const ws = new WebSocket('ws://localhost:5001');
 
 ws.onmessage = (event) => {
   const data = JSON.parse(event.data);
@@ -183,7 +187,7 @@ Backend Server
 Edit `.env` file:
 
 ```env
-PORT=5000
+PORT=5001
 ETHEREUM_RPC_URL=https://eth.llamarpc.com
 ETHEREUM_WS_URL=wss://eth.llamarpc.com
 CHAIN_NAME=ethereum
@@ -223,4 +227,3 @@ For each tracked address, the service monitors:
 ## 📝 License
 
 MIT
-
